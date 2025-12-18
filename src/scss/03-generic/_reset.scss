@@ -1,0 +1,49 @@
+/* The Aviant Remedy - Modern CSS Reset */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Smooth scrolling only if user doesn't prefer reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--av-font-sans);
+  font-size: var(--av-text-base);
+  line-height: 1.6;
+  color: var(--av-text-main);
+  background-color: var(--av-surface-base);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Better text wrapping for headings */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  font-weight: var(--av-font-bold);
+  letter-spacing: var(--av-tracking-tight);
+  text-wrap: balance; /* The browser balances lines automatically */
+}
+
+p {
+  text-wrap: pretty; /* Prevents single words on the last line */
+  max-width: 65ch; /* Optimal reading length */
+}
+
+/* Images behave like blocks */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Accessible hidden attribute */
+[hidden] {
+  display: none !important;
+}

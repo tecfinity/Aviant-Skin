@@ -1,0 +1,29 @@
+/* THE SMART GRID
+   A modern CSS Grid implementation.
+*/
+
+.av-grid {
+  display: grid;
+  gap: var(--av-space-6);
+
+  /* Default: 1 column */
+  grid-template-columns: 1fr;
+
+  /* MODIFIER: 12 Column System */
+  &.av-grid-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  /* MODIFIER: Auto-Fit (Responsive without media queries) */
+  /* Usage: .av-grid-auto-fit style="--min-col-width: 300px" */
+  &.av-grid-auto-fit {
+    --min-col-width: 250px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-col-width), 1fr));
+  }
+}
+
+/* Span Utilities */
+.av-col-span-full { grid-column: 1 / -1; }
+.av-col-span-6    { grid-column: span 6; }
+.av-col-span-4    { grid-column: span 4; }
+.av-col-span-3    { grid-column: span 3; }

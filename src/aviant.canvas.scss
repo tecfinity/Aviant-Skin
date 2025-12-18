@@ -1,0 +1,21 @@
+/* AVIANT CANVAS (Frontend Theme)
+   Builds on top of Core.
+*/
+@use "sass:meta";
+
+/* Import Core first */
+@use "aviant.core";
+
+/* Canvas-Specific Settings overrides */
+@layer settings {
+  :root {
+    /* Larger, more spacious layout for Frontend */
+    --av-text-base: 1rem;
+    --av-font-heading: var(--av-font-display);
+  }
+}
+
+@layer components {
+  /* Import Canvas Components */
+  @include meta.load-css("scss/06-components/canvas/hero");
+}

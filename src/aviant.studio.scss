@@ -1,0 +1,21 @@
+/* AVIANT STUDIO (Admin Theme)
+   Builds on top of Core.
+*/
+@use "sass:meta";
+
+/* Import Core first */
+@use "aviant.core";
+
+/* Studio-Specific Settings overrides */
+@layer settings {
+  :root {
+    /* Denser layout for Admin */
+    --av-text-base: 0.875rem;
+  }
+}
+
+@layer components {
+  /* Import Studio Components */
+  @include meta.load-css("scss/06-components/studio/sidebar");
+  @include meta.load-css("scss/06-components/studio/datatable");
+}

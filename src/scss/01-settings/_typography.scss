@@ -1,0 +1,36 @@
+:root {
+  /* =========================================
+     FONT FAMILIES
+     ========================================= */
+  --av-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --av-font-mono: 'JetBrains Mono', monospace;
+
+  /* Optional for 'Canvas' Marketing sites */
+  --av-font-display: 'Playfair Display', serif;
+
+  /* =========================================
+     FLUID SCALE (Clamp)
+     ========================================= */
+
+  /* Base text: 16px on mobile, grows to 18px on large screens */
+  --av-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+
+  /* Headings: Grow aggressively on desktop */
+  --av-text-xs:   clamp(0.75rem, 0.70rem + 0.25vw, 0.875rem);
+  --av-text-sm:   clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+  --av-text-lg:   clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem);
+  --av-text-xl:   clamp(1.35rem, 1.25rem + 0.5vw, 1.75rem);
+  --av-text-2xl:  clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+  --av-text-3xl:  clamp(2.25rem, 1.8rem + 2.25vw, 3.5rem); /* Hero Titles */
+
+  /* =========================================
+     WEIGHTS & TRACKING
+     ========================================= */
+  --av-font-light: 300;
+  --av-font-regular: 400;
+  --av-font-medium: 500;
+  --av-font-bold: 700;
+
+  --av-tracking-tight: -0.02em;
+  --av-tracking-wide: 0.05em;
+}

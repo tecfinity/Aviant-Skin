@@ -1,0 +1,60 @@
+/* CORE CARDS
+   Smart, container-query-aware surfaces.
+*/
+
+.av-card {
+  /* 1. Architecture */
+  --card-padding: var(--av-space-6);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: var(--av-surface-panel);
+  background-clip: border-box;
+  border: 1px solid var(--av-border-subtle);
+  border-radius: var(--av-radius-lg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+  /* 2. Container Query Context */
+  container-type: inline-size;
+  container-name: card;
+
+  /* 3. Children */
+  & > img:first-child {
+    border-top-left-radius: calc(var(--av-radius-lg) - 1px);
+    border-top-right-radius: calc(var(--av-radius-lg) - 1px);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .av-card-body {
+    flex: 1 1 auto;
+    padding: var(--card-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--av-space-4);
+  }
+
+  .av-card-title {
+    font-size: var(--av-text-lg);
+    font-weight: var(--av-font-bold);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* 4. The "Smart" horizontal switch */
+  &.av-card-horizontal {
+    @container card (min-width: 500px) {
+      flex-direction: row;
+      align-items: center;
+
+      & > img:first-child {
+        width: 40%;
+        height: 100%;
+        border-radius: var(--av-radius-lg) 0 0 var(--av-radius-lg);
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+/* AVIANT CORE (Foundation)
+   Required by both Studio and Canvas.
+*/
+@use "sass:meta";
+
+/* 1. LAYERS */
+@use "scss/01-settings/layers";
+
+/* 2. SETTINGS */
+@layer settings {
+  @include meta.load-css("scss/01-settings/colors");
+  @include meta.load-css("scss/01-settings/typography");
+  @include meta.load-css("scss/01-settings/spacing");
+}
+
+/* 3. GENERIC */
+@layer generic {
+  @include meta.load-css("scss/03-generic/reset");
+}
+
+/* 4. ELEMENTS */
+@layer elements {
+  /* @include meta.load-css("scss/04-elements/links"); */
+}
+
+/* 5. OBJECTS */
+@layer objects {
+  @include meta.load-css("scss/05-objects/shell");
+  @include meta.load-css("scss/05-objects/container");
+  @include meta.load-css("scss/05-objects/grid");
+}
+
+/* 6. CORE COMPONENTS */
+@layer components {
+  @include meta.load-css("scss/06-components/core/buttons");
+  @include meta.load-css("scss/06-components/core/inputs");
+  @include meta.load-css("scss/06-components/core/cards");
+}

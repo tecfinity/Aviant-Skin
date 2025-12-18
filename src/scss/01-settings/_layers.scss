@@ -1,0 +1,6 @@
+/* THE AVIANT CASCADE
+   Defines the strict order of style priority.
+   Users can override anything in 'utilities' or by not using a layer.
+*/
+
+@layer settings, tools, generic, elements, objects, components, themes, utilities;

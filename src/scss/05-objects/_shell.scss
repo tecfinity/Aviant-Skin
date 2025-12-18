@@ -1,0 +1,21 @@
+/* THE SHELL
+   The master container for any Aviant Application.
+   Handles the sticky footer and basic constraint.
+*/
+
+.av-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  isolation: isolate; /* Create new stacking context */
+
+  /* Ensure footer sticks to bottom */
+  & > main {
+    flex: 1;
+    width: 100%;
+    /* Fix for flexbox overflow issues */
+    min-width: 0;
+  }
+}

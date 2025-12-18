@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviant Skin | Core System Status</title>
+  <!-- Import the Aviant Core Entry Point -->
+  <script type="module" src="/src/aviant.core.scss"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<!-- 1. THE SHELL (Layout Object) -->
+<div class="av-shell">
+
+  <main>
+    <!-- 2. THE CONTAINER (Constraint) -->
+    <div class="av-container" style="padding-top: var(--av-space-12); padding-bottom: var(--av-space-24);">
+
+      <!-- Header -->
+      <header style="margin-bottom: var(--av-space-16); text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--av-space-4); color: var(--av-action-primary);">
+          <i data-lucide="layers" style="width: 24px; height: 24px;"></i>
+          <span style="font-weight: var(--av-font-bold); letter-spacing: var(--av-tracking-wide);">AVIANT SKIN</span>
+        </div>
+        <h1 style="font-size: var(--av-text-3xl); margin-bottom: var(--av-space-4);">Core System Operational</h1>
+        <p style="font-size: var(--av-text-lg); color: var(--av-text-muted); max-width: 60ch; margin-inline: auto;">
+          The foundational layer is active. Below are the base components inheriting the physics engine (Fluid Type, OKLCH Colors, and Smart Grids).
+        </p>
+      </header>
+
+      <!-- 3. THE GRID (Layout Object) -->
+      <div class="av-grid av-grid-auto-fit" style="--min-col-width: 300px; gap: var(--av-space-8);">
+
+        <!-- CARD 1: TYPOGRAPHY -->
+        <article class="av-card">
+          <div class="av-card-body">
+            <h3 class="av-card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="type" style="width: 18px; color: var(--av-text-muted);"></i> Typography
+            </h3>
+            <p style="color: var(--av-text-muted); font-size: var(--av-text-sm); margin-bottom: var(--av-space-4);">
+              Fluid scaling using <code>clamp()</code>.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--av-space-2); padding: var(--av-space-4); background: var(--av-surface-subtle); border-radius: var(--av-radius-md);">
+              <span style="font-size: var(--av-text-2xl); font-weight: bold; line-height: 1;">Aa</span>
+              <span style="font-size: var(--av-text-xl); font-weight: bold;">Heading XL</span>
+              <span style="font-size: var(--av-text-lg); font-weight: medium;">Heading LG</span>
+              <span style="font-size: var(--av-text-base);">Body Base Text</span>
+              <span style="font-size: var(--av-text-sm); color: var(--av-text-muted);">Utility Small Text</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 2: INTERACTIVE -->
+        <article class="av-card">
+          <div class="av-card-body">
+            <h3 class="av-card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="mouse-pointer-2" style="width: 18px; color: var(--av-text-muted);"></i> Interactive
+            </h3>
+            <p style="color: var(--av-text-muted); font-size: var(--av-text-sm); margin-bottom: var(--av-space-4);">
+              Core button states and variants.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--av-space-3);">
+              <button class="av-btn av-btn-primary">Primary Action</button>
+              <button class="av-btn av-btn-ghost">Ghost Button</button>
+              <button class="av-btn av-btn-primary av-btn-sm">Small</button>
+              <button class="av-btn av-btn-primary" disabled>Disabled</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3: INPUTS -->
+        <article class="av-card">
+          <div class="av-card-body">
+            <h3 class="av-card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="form-input" style="width: 18px; color: var(--av-text-muted);"></i> Forms
+            </h3>
+            <p style="color: var(--av-text-muted); font-size: var(--av-text-sm); margin-bottom: var(--av-space-4);">
+              Normalized inputs with focus rings.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--av-space-4);">
+              <div class="av-input-group">
+                <label class="av-label">Email Address</label>
+                <input type="email" class="av-input" placeholder="name@company.com">
+              </div>
+              <div class="av-input-group">
+                <label class="av-label">Role</label>
+                <select class="av-select">
+                  <option>Administrator</option>
+                  <option>Editor</option>
+                  <option>Viewer</option>
+                </select>
+              </div>
+              <label style="display: flex; align-items: center; gap: 0.5rem; font-size: var(--av-text-sm);">
+                <input type="checkbox" class="av-checkbox" checked>
+                <span>Subscribe to newsletter</span>
+              </label>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 4: COLORS -->
+        <article class="av-card av-col-span-full">
+          <div class="av-card-body">
+            <h3 class="av-card-title">Dynamic Palette (OKLCH)</h3>
+            <p style="color: var(--av-text-muted); font-size: var(--av-text-sm); margin-bottom: var(--av-space-4);">
+              Colors adapt automatically to light/dark mode preferences.
+            </p>
+            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 120px; gap: var(--av-space-3);">
+              <div style="height: 60px; background: var(--av-action-primary); border-radius: var(--av-radius-md); display: grid; place-content: center; color: white; font-size: var(--av-text-xs);">Primary</div>
+              <div style="height: 60px; background: var(--av-action-primary-hover); border-radius: var(--av-radius-md); display: grid; place-content: center; color: white; font-size: var(--av-text-xs);">Hover</div>
+              <div style="height: 60px; background: oklch(var(--av-ink-success)); border-radius: var(--av-radius-md); display: grid; place-content: center; color: white; font-size: var(--av-text-xs);">Success</div>
+              <div style="height: 60px; background: oklch(var(--av-ink-warning)); border-radius: var(--av-radius-md); display: grid; place-content: center; color: white; font-size: var(--av-text-xs);">Warning</div>
+              <div style="height: 60px; background: oklch(var(--av-ink-danger)); border-radius: var(--av-radius-md); display: grid; place-content: center; color: white; font-size: var(--av-text-xs);">Danger</div>
+              <div style="height: 60px; background: var(--av-surface-studio); border: 1px solid var(--av-border-subtle); border-radius: var(--av-radius-md); display: grid; place-content: center; color: var(--av-text-muted); font-size: var(--av-text-xs);">Surface</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: var(--av-space-8); border-top: 1px solid var(--av-border-subtle); color: var(--av-text-muted); font-size: var(--av-text-xs);">
+    Aviant Skin v0.1 &middot; Proprietary System
+  </footer>
+
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

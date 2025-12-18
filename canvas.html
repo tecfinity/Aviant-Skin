@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviant Canvas | Frontend Experience</title>
+    <!-- Import Canvas Theme (Loads Core + Hero + Features) -->
+    <script type="module" src="/src/aviant.canvas.scss"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<!-- 1. HERO SECTION -->
+<header class="av-hero">
+    <div class="av-container">
+        <div class="av-hero-content">
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--av-space-6); padding: 4px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--av-radius-full); background: rgba(255,255,255,0.05); backdrop-filter: blur(4px);">
+                <span style="width: 8px; height: 8px; background: #0ea5e9; border-radius: 50%; box-shadow: 0 0 10px #0ea5e9;"></span>
+                <span style="font-size: var(--av-text-xs); letter-spacing: 0.05em; font-weight: 500; text-transform: uppercase;">System Operational</span>
+            </div>
+
+            <h1>Build without<br>boundaries.</h1>
+
+            <p class="lead">
+                The enterprise content engine for those who demand performance, security, and absolute control.
+            </p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: var(--av-space-4);">
+                <button class="av-btn av-btn-primary av-btn-lg">Start Project</button>
+                <button class="av-btn av-btn-ghost av-btn-lg" style="color: white; border: 1px solid rgba(255,255,255,0.2);">Documentation</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 2. MAIN CONTENT -->
+<div class="av-shell">
+    <main style="padding: var(--av-space-16) 0;">
+        <div class="av-container">
+
+            <div style="margin-bottom: var(--av-space-12);">
+                <span style="color: var(--av-action-primary); font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; font-size: var(--av-text-sm);">Features</span>
+                <h2 style="font-size: var(--av-text-2xl); margin-top: var(--av-space-2);">Engineered for Scale</h2>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 350px; gap: var(--av-space-8);">
+
+                <!-- Card 1 -->
+                <article class="av-card">
+                    <!-- FIX: Replaced broken image with working Tech Abstract image -->
+                    <img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Server" style="height: 240px;">
+                    <div class="av-card-body">
+                        <h3 class="av-card-title">Proprietary Core</h3>
+                        <p style="color: var(--av-text-muted);">
+                            Unlike open-source CMS platforms exposed to public vulnerability databases, Aviant is a closed ecosystem.
+                        </p>
+                        <button class="av-btn av-btn-ghost" style="padding-left: 0; align-self: start;">Learn about Security &rarr;</button>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="av-card">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Global" style="height: 240px;">
+                    <div class="av-card-body">
+                        <h3 class="av-card-title">Edge Deployment</h3>
+                        <p style="color: var(--av-text-muted);">
+                            Content is replicated globally in milliseconds. Your site loads instantly, whether the user is in Tokyo or New York.
+                        </p>
+                        <button class="av-btn av-btn-ghost" style="padding-left: 0; align-self: start;">View Network Map &rarr;</button>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="av-card">
+                    <div class="av-card-body">
+                        <div style="width: 48px; height: 48px; background: var(--av-surface-subtle); border-radius: var(--av-radius-md); display: grid; place-content: center; margin-bottom: var(--av-space-4); color: var(--av-action-primary);">
+                            <i data-lucide="cpu"></i>
+                        </div>
+                        <h3 class="av-card-title">API First</h3>
+                        <p style="color: var(--av-text-muted);">
+                            Headless architecture allows you to consume content via GraphQL or REST API on any platform.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: var(--av-brand-dark); color: white; padding: var(--av-space-16) 0;">
+        <div class="av-container">
+            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 200px;">
+                <div>
+                    <div style="font-weight: bold; font-size: var(--av-text-lg); margin-bottom: var(--av-space-4);">Aviant</div>
+                    <p style="font-size: var(--av-text-sm); color: rgba(255,255,255,0.6);">
+                        Social Cooperative Enterprise<br>
+                        Koin.S.Ep.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="font-size: var(--av-text-sm); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--av-space-4); opacity: 0.5;">Product</h4>
+                    <div style="display: flex; flex-direction: column; gap: var(--av-space-2);">
+                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Engine</a>
+                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Studio</a>
+                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Canvas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

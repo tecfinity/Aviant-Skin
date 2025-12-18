@@ -1,0 +1,87 @@
+/* STUDIO DATA TABLE
+   High density, sticky headers, row actions.
+*/
+
+.av-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--av-border-subtle);
+  border-radius: var(--av-radius-lg);
+  background: var(--av-surface-base);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.av-table {
+  width: 100%;
+  caption-side: bottom;
+  border-collapse: collapse;
+  font-size: var(--av-text-sm);
+
+  thead {
+    background-color: var(--av-surface-subtle);
+    border-bottom: 1px solid var(--av-border-subtle);
+
+    th {
+      padding: var(--av-space-3) var(--av-space-4);
+      text-align: left;
+      font-weight: var(--av-font-medium);
+      color: var(--av-text-muted);
+      white-space: nowrap;
+
+      /* Sticky Header Magic */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--av-surface-subtle); /* Prevent transparency */
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--av-border-subtle);
+      transition: background-color 0.1s;
+
+      &:last-child { border-bottom: none; }
+
+      &:hover {
+        background-color: var(--av-surface-subtle);
+
+        /* Reveal Actions on Hover */
+        .av-row-actions { opacity: 1; }
+      }
+
+      /* Active state (Checked) */
+      &:has(input[type="checkbox"]:checked) {
+        background-color: oklch(from var(--av-action-primary) l c h / 0.05);
+      }
+    }
+
+    td {
+      padding: var(--av-space-3) var(--av-space-4);
+      vertical-align: middle;
+      color: var(--av-text-main);
+    }
+  }
+}
+
+/* Status Badges */
+.av-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--av-radius-full);
+  font-size: 0.75rem;
+  font-weight: var(--av-font-bold);
+  line-height: 1.5;
+  white-space: nowrap;
+
+  &.av-badge-success {
+    background-color: oklch(from var(--av-ink-success) l c h / 0.1);
+    color: oklch(var(--av-ink-success));
+  }
+
+  &.av-badge-warning {
+    background-color: oklch(from var(--av-ink-warning) l c h / 0.15);
+    color: oklch(60% 0.15 85); /* Darker amber text */
+  }
+}

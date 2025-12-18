@@ -1,0 +1,93 @@
+/* CORE INPUTS
+   Modern form controls with floating labels support and verification states.
+*/
+
+.av-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--av-space-1);
+  position: relative;
+
+  /* Floating Label Logic */
+  &:has(.av-input:placeholder-shown) label {
+    /* Normal state (optional logic here) */
+  }
+}
+
+.av-label {
+  font-size: var(--av-text-xs);
+  font-weight: var(--av-font-medium);
+  color: var(--av-text-main);
+  margin-left: 2px;
+}
+
+.av-input, .av-select, .av-textarea {
+  display: block;
+  width: 100%;
+  padding: var(--av-space-2) var(--av-space-3);
+  font-family: var(--av-font-sans);
+  font-size: var(--av-text-sm);
+  color: var(--av-text-main);
+  background-color: var(--av-surface-base);
+  background-clip: padding-box;
+
+  border: 1px solid var(--av-border-strong);
+  border-radius: var(--av-radius-md);
+
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus {
+    outline: 0;
+    border-color: var(--av-action-primary);
+    box-shadow: 0 0 0 3px oklch(from var(--av-action-primary) l c h / 0.15);
+  }
+
+  &::placeholder {
+    color: var(--av-text-muted);
+    opacity: 1;
+  }
+
+  &:disabled {
+    background-color: var(--av-surface-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Validation States */
+  &[aria-invalid="true"] {
+    border-color: oklch(var(--av-ink-danger));
+    &:focus {
+      box-shadow: 0 0 0 3px oklch(from var(--av-ink-danger) l c h / 0.15);
+    }
+  }
+}
+
+.av-checkbox {
+  appearance: none;
+  width: 1.25em;
+  height: 1.25em;
+  border: 1px solid var(--av-border-strong);
+  border-radius: var(--av-radius-sm);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em white;
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  &:checked {
+    background-color: var(--av-action-primary);
+    border-color: var(--av-action-primary);
+    &::before {
+      transform: scale(1);
+    }
+  }
+}

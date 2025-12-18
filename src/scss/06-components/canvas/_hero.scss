@@ -1,0 +1,50 @@
+/* CANVAS HERO
+   High impact, large typography, grid backgrounds.
+*/
+
+.av-hero {
+  position: relative;
+  padding: var(--av-space-24) 0;
+  background-color: var(--av-brand-dark);
+  color: var(--av-text-inverse);
+  overflow: hidden;
+
+  /* The "Tech" Grid Background Pattern */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .av-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    /* Center text if desired, or use grid layout */
+  }
+
+  h1 {
+    font-family: var(--av-font-display); /* Playfair or similar */
+    font-size: var(--av-text-3xl);
+    line-height: 1.1;
+    margin-bottom: var(--av-space-6);
+
+    /* Gradient Text */
+    background: linear-gradient(to right, #fff, oklch(var(--av-ink-brand)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p.lead {
+    font-size: var(--av-text-xl);
+    color: oklch(80% 0 0); /* Light gray */
+    margin-bottom: var(--av-space-8);
+    font-weight: var(--av-font-light);
+  }
+}

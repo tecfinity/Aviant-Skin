@@ -1,0 +1,63 @@
+:root {
+  /* =========================================
+     1. PRIMITIVE PALETTE (The Raw Ink)
+     ========================================= */
+
+  /* Brand: Tecfinity Blue (Vibrant Cyan) */
+  --av-ink-brand: 65% 0.18 240;
+
+  /* Brand: Aviant Dark (Deep Navy/Black) */
+  --av-ink-dark: 18% 0.04 260;
+
+  /* Semantic Tints (Success/Warning/Error) */
+  --av-ink-success: 65% 0.18 145; /* Green */
+  --av-ink-warning: 75% 0.15 85;  /* Amber */
+  --av-ink-danger:  60% 0.20 30;  /* Red */
+
+
+  /* =========================================
+     2. SEMANTIC TOKENS (The Usage)
+     ========================================= */
+
+  /* --- Surfaces (Backgrounds) --- */
+  --av-surface-base:    oklch(100% 0 0);           /* Pure White */
+  --av-surface-subtle:  oklch(98% 0.01 240);       /* Slight Blue Tint */
+  --av-surface-studio:  oklch(96% 0.02 240);       /* App Background */
+  --av-surface-panel:   oklch(100% 0 0);           /* Cards/Modals */
+
+  /* --- Typography --- */
+  --av-text-main:       oklch(15% 0.02 260);       /* Nearly Black */
+  --av-text-muted:      oklch(55% 0.02 260);       /* Gray */
+  --av-text-inverse:    oklch(100% 0 0);           /* White */
+  --av-text-brand:      oklch(var(--av-ink-brand));
+
+  /* --- Interactive (Buttons/Links) --- */
+  --av-action-primary:        oklch(var(--av-ink-brand));
+  /* Hover calculated automatically using 'from' syntax */
+  --av-action-primary-hover:  oklch(from var(--av-action-primary) l c h / 0.9);
+
+  --av-action-dark:           oklch(var(--av-ink-dark));
+
+  /* --- Borders --- */
+  --av-border-subtle:   oklch(92% 0 0);
+  --av-border-strong:   oklch(80% 0 0);
+  --av-border-focus:    oklch(var(--av-ink-brand));
+}
+
+/* =========================================
+   3. DARK MODE (Automatic Recalculation)
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --av-surface-base:    oklch(12% 0.02 260);  /* Dark Gray */
+    --av-surface-subtle:  oklch(15% 0.02 260);
+    --av-surface-studio:  oklch(10% 0.02 260);  /* Deepest Dark */
+    --av-surface-panel:   oklch(18% 0.02 260);  /* Cards pop out */
+
+    --av-text-main:       oklch(98% 0 0);
+    --av-text-muted:      oklch(70% 0 0);
+
+    --av-border-subtle:   oklch(25% 0 0);
+    --av-border-strong:   oklch(40% 0 0);
+  }
+}

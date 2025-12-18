@@ -1,0 +1,84 @@
+/* STUDIO SIDEBAR
+   Fixed layout logic for the admin panel.
+*/
+
+.av-studio-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--av-surface-studio);
+}
+
+.av-sidebar {
+  width: 280px;
+  background-color: var(--av-brand-dark); /* Using the dark ink variable */
+  color: oklch(90% 0 0);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+
+  .av-sidebar-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--av-space-6);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-weight: var(--av-font-bold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: var(--av-text-sm);
+
+    span { color: var(--av-action-primary); }
+  }
+
+  .av-sidebar-nav {
+    flex: 1;
+    padding: var(--av-space-6) var(--av-space-3);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .av-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--av-space-3);
+    padding: var(--av-space-2) var(--av-space-3);
+    border-radius: var(--av-radius-md);
+    color: oklch(80% 0 0);
+    text-decoration: none;
+    font-size: var(--av-text-sm);
+    font-weight: var(--av-font-medium);
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.05);
+      color: white;
+    }
+
+    &.active {
+      background-color: oklch(from var(--av-action-primary) l c h / 0.15);
+      color: var(--av-action-primary);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2px;
+    }
+  }
+
+  .av-sidebar-footer {
+    padding: var(--av-space-4);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.2);
+  }
+}
+
+.av-studio-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevent flex overflow */
+}
