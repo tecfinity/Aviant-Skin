@@ -4,116 +4,551 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aviant Canvas | Frontend Experience</title>
-    <!-- Import Canvas Theme (Loads Core + Hero + Features) -->
     <script type="module" src="/src/aviant.canvas.scss"></script>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Theme Toggle Button Style */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: var(--av-surface-panel);
+            border: 1px solid var(--av-border-subtle);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--av-text-main);
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            color: var(--av-action-primary);
+        }
+
+        /* Smooth Tab Transitions */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Map Placeholder */
+        .map-frame {
+            width: 100%;
+            height: 400px;
+            background-color: var(--av-surface-subtle);
+            border-radius: var(--av-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--av-text-muted);
+            border: 1px solid var(--av-border-subtle);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        /* Floating Product Image Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-ui {
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: var(--av-radius-lg);
+            border: 1px solid var(--av-border-subtle);
+        }
+    </style>
 </head>
 <body>
 
-<!-- 1. HERO SECTION -->
-<header class="av-hero">
+<!-- NAVIGATION -->
+<nav class="av-navbar" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1);">
     <div class="av-container">
-        <div class="av-hero-content">
-            <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--av-space-6); padding: 4px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--av-radius-full); background: rgba(255,255,255,0.05); backdrop-filter: blur(4px);">
-                <span style="width: 8px; height: 8px; background: #0ea5e9; border-radius: 50%; box-shadow: 0 0 10px #0ea5e9;"></span>
-                <span style="font-size: var(--av-text-xs); letter-spacing: 0.05em; font-weight: 500; text-transform: uppercase;">System Operational</span>
+        <div class="av-cluster av-cluster-between" style="height: 80px;">
+            <div class="av-cluster" style="color: white; gap: 0.75rem;">
+                <i data-lucide="layers" style="width: 24px; height: 24px; color: var(--av-action-primary);"></i>
+                <span style="font-weight: 700; letter-spacing: -0.02em; font-size: 1.25rem;">Aviant</span>
+            </div>
+            <div class="av-cluster hidden md:flex" style="gap: var(--av-space-8);">
+                <a href="#features" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Platform</a>
+                <a href="#solutions" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Solutions</a>
+                <a href="#pricing" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Pricing</a>
+            </div>
+            <div>
+                <button class="av-btn av-btn-primary av-btn-sm">Get Started</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION (Parallax) -->
+<header class="av-hero" style="min-height: 100vh; display: flex; align-items: center; padding-top: 120px;">
+    <div class="av-container">
+        <div class="av-grid av-grid-auto-fit" style="--min-col-width: 450px; align-items: center; gap: var(--av-space-16);">
+
+            <!-- Text Content -->
+            <div class="av-hero-content">
+                <div class="av-cluster" style="margin-bottom: var(--av-space-8);">
+                        <span class="av-badge av-badge-brand" style="border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); color: white;">
+                            Enterprise Ready
+                        </span>
+                </div>
+
+                <h1>The Future of<br><span style="color: var(--av-action-primary); font-style: italic;">Digital Experiences.</span></h1>
+
+                <p class="lead">
+                    A secure, high-performance content engine designed for global scale. Build faster, deploy instantly, and manage everything from one unified cockpit.
+                </p>
+
+                <div class="av-cluster" style="gap: var(--av-space-4);">
+                    <button class="av-btn av-btn-primary av-btn-lg">
+                        Start Building <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <button class="av-btn av-btn-ghost av-btn-lg" style="color: white; border: 1px solid rgba(255,255,255,0.2);">
+                        Talk to Sales
+                    </button>
+                </div>
             </div>
 
-            <h1>Build without<br>boundaries.</h1>
-
-            <p class="lead">
-                The enterprise content engine for those who demand performance, security, and absolute control.
-            </p>
-
-            <div style="display: flex; flex-wrap: wrap; gap: var(--av-space-4);">
-                <button class="av-btn av-btn-primary av-btn-lg">Start Project</button>
-                <button class="av-btn av-btn-ghost av-btn-lg" style="color: white; border: 1px solid rgba(255,255,255,0.2);">Documentation</button>
+            <!-- Floating UI Visual -->
+            <div class="floating-ui hidden md:block">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Dashboard Interface" style="border-radius: var(--av-radius-lg); width: 100%; height: auto; display: block;">
             </div>
+
         </div>
     </div>
 </header>
 
-<!-- 2. MAIN CONTENT -->
+<!-- MAIN CONTENT -->
 <div class="av-shell">
-    <main style="padding: var(--av-space-16) 0;">
-        <div class="av-container">
+    <main>
 
-            <div style="margin-bottom: var(--av-space-12);">
-                <span style="color: var(--av-action-primary); font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; font-size: var(--av-text-sm);">Features</span>
-                <h2 style="font-size: var(--av-text-2xl); margin-top: var(--av-space-2);">Engineered for Scale</h2>
+        <!-- ALERTS SECTION -->
+        <div class="av-container" style="margin-top: -3rem; position: relative; z-index: 10;">
+            <div class="av-alert av-alert-success" style="box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <i data-lucide="check-circle" class="av-alert-icon"></i>
+                <div>
+                    <strong>System Status:</strong> All systems operational. 99.99% uptime guaranteed.
+                </div>
             </div>
-
-            <!-- Feature Grid -->
-            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 350px; gap: var(--av-space-8);">
-
-                <!-- Card 1 -->
-                <article class="av-card">
-                    <!-- FIX: Replaced broken image with working Tech Abstract image -->
-                    <img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Server" style="height: 240px;">
-                    <div class="av-card-body">
-                        <h3 class="av-card-title">Proprietary Core</h3>
-                        <p style="color: var(--av-text-muted);">
-                            Unlike open-source CMS platforms exposed to public vulnerability databases, Aviant is a closed ecosystem.
-                        </p>
-                        <button class="av-btn av-btn-ghost" style="padding-left: 0; align-self: start;">Learn about Security &rarr;</button>
-                    </div>
-                </article>
-
-                <!-- Card 2 -->
-                <article class="av-card">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Global" style="height: 240px;">
-                    <div class="av-card-body">
-                        <h3 class="av-card-title">Edge Deployment</h3>
-                        <p style="color: var(--av-text-muted);">
-                            Content is replicated globally in milliseconds. Your site loads instantly, whether the user is in Tokyo or New York.
-                        </p>
-                        <button class="av-btn av-btn-ghost" style="padding-left: 0; align-self: start;">View Network Map &rarr;</button>
-                    </div>
-                </article>
-
-                <!-- Card 3 -->
-                <article class="av-card">
-                    <div class="av-card-body">
-                        <div style="width: 48px; height: 48px; background: var(--av-surface-subtle); border-radius: var(--av-radius-md); display: grid; place-content: center; margin-bottom: var(--av-space-4); color: var(--av-action-primary);">
-                            <i data-lucide="cpu"></i>
-                        </div>
-                        <h3 class="av-card-title">API First</h3>
-                        <p style="color: var(--av-text-muted);">
-                            Headless architecture allows you to consume content via GraphQL or REST API on any platform.
-                        </p>
-                    </div>
-                </article>
-
-            </div>
-
         </div>
+
+        <!-- FEATURES SECTION -->
+        <section id="features" style="padding: var(--av-space-24) 0;">
+            <div class="av-container">
+
+                <div class="av-stack av-stack-sm text-center" style="margin-bottom: var(--av-space-20); max-width: 800px; margin-inline: auto;">
+                    <span style="color: var(--av-action-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.875rem;">Capabilities</span>
+                    <h2>Engineered for the Modern Web.</h2>
+                    <p class="text-muted text-lg">
+                        Aviant Skin isn't just a UI kit. It's a comprehensive design system built on the latest web technologies.
+                    </p>
+                </div>
+
+                <div class="av-stack av-stack-lg">
+
+                    <!-- Feature 1: Image Left -->
+                    <div class="av-feature">
+                        <div class="av-feature-media">
+                            <!-- UPDATED WORKING IMAGE -->
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Security Dashboard">
+                        </div>
+                        <div class="av-feature-content">
+                            <div style="width: 64px; height: 64px; background: var(--av-surface-subtle); border-radius: var(--av-radius-xl); display: grid; place-content: center; color: var(--av-action-primary); margin-bottom: var(--av-space-6);">
+                                <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
+                            </div>
+                            <h3>Enterprise Grade Security</h3>
+                            <p class="text-muted">
+                                Our secure architecture ensures your data is protected against common vulnerabilities. We handle security updates automatically so your team can focus on shipping features.
+                            </p>
+                            <div class="av-stack av-stack-sm">
+                                <div class="av-cluster">
+                                    <span class="av-badge av-badge-success"><i data-lucide="check" style="width: 12px; margin-right: 4px;"></i> SOC2</span>
+                                    <span class="av-badge av-badge-success"><i data-lucide="check" style="width: 12px; margin-right: 4px;"></i> HIPAA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Image Right (Handled by av-feature CSS alternating logic) -->
+                    <div class="av-feature">
+                        <div class="av-feature-media">
+                            <!-- UPDATED WORKING IMAGE -->
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Global Network">
+                        </div>
+                        <div class="av-feature-content">
+                            <div style="width: 64px; height: 64px; background: var(--av-surface-subtle); border-radius: var(--av-radius-xl); display: grid; place-content: center; color: var(--av-action-primary); margin-bottom: var(--av-space-6);">
+                                <i data-lucide="globe" style="width: 32px; height: 32px;"></i>
+                            </div>
+                            <h3>Global Edge Network</h3>
+                            <p class="text-muted">
+                                Content is replicated to 200+ edge locations worldwide. Your digital experiences load instantly, regardless of where your users are located.
+                            </p>
+                            <button class="av-btn av-btn-ghost text-brand" style="padding-left: 0;">
+                                Explore Infrastructure <i data-lucide="arrow-right" style="width: 16px;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOWCASE SECTION (Cards & Grid) -->
+        <section id="showcase" style="background-color: var(--av-surface-subtle); padding: var(--av-space-24) 0;">
+            <div class="av-container">
+                <div class="text-center" style="max-width: 700px; margin-inline: auto; margin-bottom: var(--av-space-16);">
+                    <h2>Connects with everything.</h2>
+                    <p class="text-muted">
+                        Headless architecture allows you to consume content via standard protocols.
+                    </p>
+                </div>
+
+                <div class="av-grid av-grid-auto-fit" style="--min-col-width: 300px;">
+                    <!-- Card 1 -->
+                    <article class="av-card">
+                        <div class="av-card-body">
+                            <div class="av-cluster av-cluster-between" style="margin-bottom: var(--av-space-4);">
+                                <i data-lucide="code-2" style="width: 24px; color: var(--av-text-main);"></i>
+                                <span class="av-badge">v1.4</span>
+                            </div>
+                            <h3 class="av-card-title">REST API</h3>
+                            <p class="text-muted">Standard RESTful endpoints with comprehensive documentation and predictable resource URLs.</p>
+                        </div>
+                    </article>
+                    <!-- Card 2 -->
+                    <article class="av-card">
+                        <div class="av-card-body">
+                            <div class="av-cluster av-cluster-between" style="margin-bottom: var(--av-space-4);">
+                                <i data-lucide="database" style="width: 24px; color: #E10098;"></i>
+                                <span class="av-badge av-badge-brand">Popular</span>
+                            </div>
+                            <h3 class="av-card-title">GraphQL</h3>
+                            <p class="text-muted">Query exactly what you need with our auto-generated, strictly typed GraphQL schema.</p>
+                        </div>
+                    </article>
+                    <!-- Card 3 -->
+                    <article class="av-card">
+                        <div class="av-card-body">
+                            <div class="av-cluster av-cluster-between" style="margin-bottom: var(--av-space-4);">
+                                <i data-lucide="webhook" style="width: 24px; color: var(--av-action-primary);"></i>
+                                <span class="av-badge">Real-time</span>
+                            </div>
+                            <h3 class="av-card-title">Webhooks</h3>
+                            <p class="text-muted">Trigger build pipelines or notify external services instantly when content changes.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FULL WIDTH CTA -->
+        <section style="background-color: var(--av-action-primary); color: white; padding: var(--av-space-24) 0;">
+            <div class="av-container text-center">
+                <h2 style="color: white; margin-bottom: var(--av-space-6);">Ready to accelerate your workflow?</h2>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.25rem; max-width: 600px; margin-inline: auto; margin-bottom: var(--av-space-10);">
+                    Join thousands of developers building the future of the web with Aviant.
+                </p>
+                <button class="av-btn av-btn-lg" style="background: white; color: var(--av-action-primary);">Get Started Now</button>
+            </div>
+        </section>
+
+        <!-- AVATARS & TESTIMONIALS -->
+        <section style="padding: var(--av-space-24) 0;">
+            <div class="av-container text-center">
+                <h2>Loved by Developers</h2>
+                <div class="av-cluster av-cluster-center" style="margin: var(--av-space-8) 0;">
+                    <div class="av-avatar-group">
+                        <div class="av-avatar"><img src="https://i.pravatar.cc/100?img=1" alt="User"></div>
+                        <div class="av-avatar"><img src="https://i.pravatar.cc/100?img=2" alt="User"></div>
+                        <div class="av-avatar"><img src="https://i.pravatar.cc/100?img=3" alt="User"></div>
+                        <div class="av-avatar"><img src="https://i.pravatar.cc/100?img=4" alt="User"></div>
+                        <div class="av-avatar av-avatar-text">+40</div>
+                    </div>
+                </div>
+                <p class="text-muted" style="max-width: 600px; margin-inline: auto;">
+                    "Aviant Skin provides the perfect balance between strict structure and creative freedom. It's the best framework we've used."
+                </p>
+            </div>
+        </section>
+
+        <!-- TABS & PRICING -->
+        <section id="pricing" style="background-color: var(--av-surface-subtle); padding: var(--av-space-24) 0;">
+            <div class="av-container">
+                <div class="text-center" style="margin-bottom: var(--av-space-12);">
+                    <h2>Simple Pricing</h2>
+                    <p class="text-muted">Transparent pricing for teams of all sizes.</p>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="av-cluster av-cluster-center" style="margin-bottom: var(--av-space-8);">
+                    <div class="av-tabs">
+                        <button class="av-tab active" onclick="switchTab(event, 'monthly')">Monthly</button>
+                        <button class="av-tab" onclick="switchTab(event, 'yearly')">Yearly (Save 20%)</button>
+                    </div>
+                </div>
+
+                <!-- Content: Monthly -->
+                <div id="monthly" class="tab-content active">
+                    <div class="av-grid av-grid-auto-fit" style="--min-col-width: 300px; gap: var(--av-space-8);">
+                        <!-- Free -->
+                        <article class="av-card" style="padding: var(--av-space-8);">
+                            <div class="av-card-body">
+                                <h3>Starter</h3>
+                                <div style="font-size: 3rem; font-weight: 800; margin: var(--av-space-4) 0;">$0</div>
+                                <p class="text-muted">Perfect for side projects.</p>
+                                <div class="av-stack av-stack-sm" style="margin-top: var(--av-space-6);">
+                                    <div class="av-cluster"><i data-lucide="check" class="text-brand"></i> 1 Project</div>
+                                    <div class="av-cluster"><i data-lucide="check" class="text-brand"></i> Community Support</div>
+                                </div>
+                                <button class="av-btn av-btn-ghost" style="width: 100%; border: 1px solid var(--av-border-strong); margin-top: var(--av-space-8);">Sign Up</button>
+                            </div>
+                        </article>
+                        <!-- Pro -->
+                        <article class="av-card" style="padding: var(--av-space-8); border-color: var(--av-action-primary); box-shadow: 0 0 0 2px var(--av-action-primary);">
+                            <div class="av-card-body">
+                                <div class="av-cluster av-cluster-between">
+                                    <h3>Pro</h3>
+                                    <span class="av-badge av-badge-brand">Popular</span>
+                                </div>
+                                <div style="font-size: 3rem; font-weight: 800; margin: var(--av-space-4) 0;">$49</div>
+                                <p class="text-muted">For growing businesses.</p>
+                                <div class="av-stack av-stack-sm" style="margin-top: var(--av-space-6);">
+                                    <div class="av-cluster"><i data-lucide="check" class="text-brand"></i> Unlimited Projects</div>
+                                    <div class="av-cluster"><i data-lucide="check" class="text-brand"></i> Priority Support</div>
+                                </div>
+                                <button class="av-btn av-btn-primary" style="width: 100%; margin-top: var(--av-space-8);">Start Trial</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Content: Yearly -->
+                <div id="yearly" class="tab-content">
+                    <div class="av-grid av-grid-auto-fit" style="--min-col-width: 300px; gap: var(--av-space-8);">
+                        <!-- Free Year -->
+                        <article class="av-card" style="padding: var(--av-space-8);">
+                            <div class="av-card-body">
+                                <h3>Starter Yearly</h3>
+                                <div style="font-size: 3rem; font-weight: 800; margin: var(--av-space-4) 0;">$0</div>
+                                <p class="text-muted">Still free, forever.</p>
+                                <button class="av-btn av-btn-ghost" style="width: 100%; border: 1px solid var(--av-border-strong); margin-top: var(--av-space-8);">Sign Up</button>
+                            </div>
+                        </article>
+                        <!-- Pro Year -->
+                        <article class="av-card" style="padding: var(--av-space-8); border-color: var(--av-action-primary); box-shadow: 0 0 0 2px var(--av-action-primary);">
+                            <div class="av-card-body">
+                                <div class="av-cluster av-cluster-between">
+                                    <h3>Pro Yearly</h3>
+                                    <span class="av-badge av-badge-brand">Save $100</span>
+                                </div>
+                                <div style="font-size: 3rem; font-weight: 800; margin: var(--av-space-4) 0;">$490</div>
+                                <p class="text-muted">Billed annually.</p>
+                                <button class="av-btn av-btn-primary" style="width: 100%; margin-top: var(--av-space-8);">Start Trial</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT & MAP -->
+        <section style="padding: var(--av-space-24) 0;">
+            <div class="av-container">
+                <div class="av-grid av-grid-auto-fit" style="--min-col-width: 400px; gap: var(--av-space-12);">
+
+                    <!-- Contact Form -->
+                    <div>
+                        <div class="av-stack av-stack-sm" style="margin-bottom: var(--av-space-8);">
+                            <h2>Get in Touch</h2>
+                            <p class="text-muted">Have questions? Our team is here to help you get started.</p>
+                        </div>
+                        <form class="av-stack" onsubmit="event.preventDefault(); document.getElementById('successModal').showModal();">
+                            <div class="av-input-group">
+                                <label class="av-label">Full Name</label>
+                                <input type="text" class="av-input" placeholder="John Doe">
+                            </div>
+                            <div class="av-input-group">
+                                <label class="av-label">Email Address</label>
+                                <input type="email" class="av-input" placeholder="john@example.com">
+                            </div>
+                            <div class="av-input-group">
+                                <label class="av-label">Message</label>
+                                <textarea class="av-textarea" rows="4" placeholder="How can we help?"></textarea>
+                            </div>
+                            <button type="submit" class="av-btn av-btn-primary">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Map -->
+                    <div>
+                        <div class="av-stack av-stack-sm" style="margin-bottom: var(--av-space-8);">
+                            <h2>Our Headquarters</h2>
+                            <p class="text-muted">Visit us at our global offices.</p>
+                        </div>
+                        <div class="map-frame">
+                            <div style="position: relative; z-index: 2; text-align: center; background: rgba(0,0,0,0.6); padding: 2rem; border-radius: 8px; color: white; backdrop-filter: blur(4px);">
+                                <i data-lucide="map-pin" style="width: 48px; height: 48px; margin-bottom: 1rem; color: #fff;"></i>
+                                <p style="font-weight: bold; font-size: 1.2rem;">Tecfinity HQ</p>
+                                <p>123 Innovation Dr.<br>Tech City, TC 90210</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL DEMO (Hidden trigger) -->
+        <div class="text-center" style="padding: var(--av-space-12) 0;">
+            <button class="av-btn av-btn-ghost" onclick="document.getElementById('demoModal').showModal()">Open Demo Modal</button>
+        </div>
+
+        <!-- MODAL ELEMENT -->
+        <dialog id="demoModal" class="av-modal">
+            <div class="av-modal-header">
+                <h3>System Notification</h3>
+                <button class="av-btn av-btn-ghost av-btn-sm" onclick="this.closest('dialog').close()"><i data-lucide="x"></i></button>
+            </div>
+            <div class="av-modal-body">
+                <p>This is a native HTML dialog styled with Aviant Skin. It handles backdrop, focus trapping, and accessibility automatically.</p>
+            </div>
+            <div class="av-modal-footer">
+                <button class="av-btn av-btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+                <button class="av-btn av-btn-primary" onclick="this.closest('dialog').close()">Confirm Action</button>
+            </div>
+        </dialog>
+
+        <!-- SUCCESS MODAL -->
+        <dialog id="successModal" class="av-modal">
+            <div class="av-modal-header">
+                <h3>Message Sent</h3>
+                <button class="av-btn av-btn-ghost av-btn-sm" onclick="this.closest('dialog').close()"><i data-lucide="x"></i></button>
+            </div>
+            <div class="av-modal-body">
+                <p>Thank you for reaching out! Our team will get back to you within 24 hours.</p>
+            </div>
+            <div class="av-modal-footer">
+                <button class="av-btn av-btn-primary" onclick="this.closest('dialog').close()">Close</button>
+            </div>
+        </dialog>
+
     </main>
 
-    <footer style="background: var(--av-brand-dark); color: white; padding: var(--av-space-16) 0;">
+    <!-- FOOTER -->
+    <footer style="background: #0b0f19; color: white; padding: var(--av-space-16) 0;">
         <div class="av-container">
-            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 200px;">
-                <div>
-                    <div style="font-weight: bold; font-size: var(--av-text-lg); margin-bottom: var(--av-space-4);">Aviant</div>
-                    <p style="font-size: var(--av-text-sm); color: rgba(255,255,255,0.6);">
-                        Social Cooperative Enterprise<br>
-                        Koin.S.Ep.
+            <div class="av-grid av-grid-auto-fit" style="--min-col-width: 200px; gap: var(--av-space-12);">
+                <div style="grid-column: span 2;">
+                    <div class="av-cluster" style="margin-bottom: var(--av-space-6);">
+                        <i data-lucide="layers" class="text-brand"></i>
+                        <span style="font-weight: 700; font-size: 1.25rem;">Aviant</span>
+                    </div>
+                    <p class="text-muted" style="color: rgba(255,255,255,0.5);">
+                        Building secure, scalable engines for the future of the web.
                     </p>
                 </div>
                 <div>
-                    <h4 style="font-size: var(--av-text-sm); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--av-space-4); opacity: 0.5;">Product</h4>
-                    <div style="display: flex; flex-direction: column; gap: var(--av-space-2);">
-                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Engine</a>
-                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Studio</a>
-                        <a href="#" style="color: white; text-decoration: none; font-size: var(--av-text-sm);">Canvas</a>
+                    <h4 style="text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--av-space-6);">Product</h4>
+                    <div class="av-stack av-stack-sm">
+                        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">Engine</a>
+                        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">Studio</a>
                     </div>
                 </div>
+                <div>
+                    <h4 style="text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--av-space-6);">Company</h4>
+                    <div class="av-stack av-stack-sm">
+                        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">About</a>
+                        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">Careers</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: var(--av-space-16); padding-top: var(--av-space-8); border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem;">
+                &copy; 2025 Tecfinity. All rights reserved.
             </div>
         </div>
     </footer>
 </div>
 
-<script>lucide.createIcons();</script>
+<!-- THEME TOGGLE BUTTON -->
+<button class="theme-toggle" id="themeBtn" aria-label="Toggle Dark Mode">
+    <i data-lucide="moon"></i>
+</button>
+
+<script>
+    // 1. Initialize Icons
+    lucide.createIcons();
+
+    // 2. Theme Toggle Logic (Fixed)
+    const themeBtn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+
+    function updateThemeIcon(isDark) {
+        if (isDark) {
+            themeBtn.innerHTML = '<i data-lucide="sun"></i>';
+        } else {
+            themeBtn.innerHTML = '<i data-lucide="moon"></i>';
+        }
+        lucide.createIcons(); // Refresh icons
+    }
+
+    // Check Local Storage or System Preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+        html.classList.add('dark');
+        updateThemeIcon(true);
+    } else {
+        html.classList.remove('dark');
+        updateThemeIcon(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeIcon(isDark);
+    });
+
+    // 3. Tab Logic (Fixed)
+    window.switchTab = function(event, tabId) {
+        event.preventDefault(); // Stop page jump
+
+        // Remove active from buttons
+        document.querySelectorAll('.av-tab').forEach(b => b.classList.remove('active'));
+        // Add active to clicked
+        event.target.classList.add('active');
+
+        // Hide contents
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        // Show target
+        document.getElementById(tabId).classList.add('active');
+    }
+</script>
 </body>
 </html>

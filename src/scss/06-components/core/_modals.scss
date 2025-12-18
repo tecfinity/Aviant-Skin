@@ -1,17 +1,18 @@
 /* CORE MODALS
    Native <dialog> element styling.
-   Requires no JS for basic open/close if using .showModal()
 */
 dialog.av-modal {
   padding: 0;
   border: none;
   border-radius: var(--av-radius-lg);
-  background: var(--av-surface-panel);
+
+  /* FIX: Explicit background and text color to prevent transparency issues */
+  background-color: var(--av-surface-panel);
+  color: var(--av-text-main);
+
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   max-width: 90vw;
   width: 500px;
-
-  /* Centering Logic */
   margin: auto;
 
   &::backdrop {
@@ -20,7 +21,6 @@ dialog.av-modal {
     transition: opacity 0.3s;
   }
 
-  /* Animation */
   &[open] {
     animation: av-modal-in var(--av-duration-normal) var(--av-ease-out);
   }
@@ -32,16 +32,23 @@ dialog.av-modal {
     justify-content: space-between;
     align-items: center;
 
-    h3 { margin: 0; font-size: var(--av-text-lg); }
+    /* Ensure header text is readable */
+    h3 {
+      margin: 0;
+      font-size: var(--av-text-lg);
+      color: var(--av-text-main);
+    }
   }
 
   .av-modal-body {
     padding: var(--av-space-6);
+    color: var(--av-text-muted); /* Softer body text */
   }
 
   .av-modal-footer {
     padding: var(--av-space-4) var(--av-space-6);
     background-color: var(--av-surface-subtle);
+    border-top: 1px solid var(--av-border-subtle);
     display: flex;
     justify-content: flex-end;
     gap: var(--av-space-3);
