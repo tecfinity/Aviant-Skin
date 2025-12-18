@@ -1,0 +1,41 @@
+/* CORE TABS
+   Navigation switchers.
+*/
+
+.av-tabs {
+  display: flex;
+  gap: var(--av-space-6);
+  border-bottom: 1px solid var(--av-border-subtle);
+  margin-bottom: var(--av-space-6);
+
+  .av-tab {
+    padding: var(--av-space-3) 0;
+    background: none;
+    border: none;
+    font-family: var(--av-font-sans);
+    font-size: var(--av-text-sm);
+    font-weight: var(--av-font-medium);
+    color: var(--av-text-muted);
+    cursor: pointer;
+    position: relative;
+    transition: color var(--av-duration-fast);
+
+    &:hover {
+      color: var(--av-text-main);
+    }
+
+    &.active {
+      color: var(--av-action-primary);
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--av-action-primary);
+      }
+    }
+  }
+}

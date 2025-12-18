@@ -23,6 +23,7 @@
 /* 4. ELEMENTS */
 @layer elements {
   /* @include meta.load-css("scss/04-elements/headings"); */
+  /* @include meta.load-css("scss/04-elements/tables"); */
 }
 
 /* 5. OBJECTS */
@@ -31,7 +32,7 @@
   @include meta.load-css("scss/05-objects/container");
   @include meta.load-css("scss/05-objects/grid");
   @include meta.load-css("scss/05-objects/stack");
-  @include meta.load-css("scss/05-objects/clusters"); /* Matched filename */
+  @include meta.load-css("scss/05-objects/clusters");
 }
 
 /* 6. CORE COMPONENTS */
@@ -42,10 +43,12 @@
   @include meta.load-css("scss/06-components/core/badges");
   @include meta.load-css("scss/06-components/core/avatars");
   @include meta.load-css("scss/06-components/core/modals");
+  @include meta.load-css("scss/06-components/core/alerts");
+  @include meta.load-css("scss/06-components/core/tabs");
 }
 
 /* 7. UTILITIES */
 @layer utilities {
-  /* @include meta.load-css("scss/07-utilities/text"); */
+  @include meta.load-css("scss/07-utilities/text");
   @include meta.load-css("scss/07-utilities/visibility");
 }
