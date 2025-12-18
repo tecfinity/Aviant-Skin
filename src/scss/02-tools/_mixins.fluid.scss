@@ -1,0 +1,8 @@
+/* FLUID TYPOGRAPHY MIXIN
+   Generates a clamp() function based on min/max viewport.
+*/
+@function fluid($min-size, $max-size, $min-vw: 320px, $max-vw: 1280px) {
+  $slope: calc(($max-size - $min-size) / ($max-vw - $min-vw));
+  $y-intercept: $min-size - ($slope * $min-vw);
+  @return clamp(#{$min-size}, #{$y-intercept} + #{100 * $slope}vw, #{$max-size});
+}

@@ -1,0 +1,21 @@
+/* TEXT UTILITIES */
+
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-left { text-align: left !important; }
+
+.text-brand { color: var(--av-action-primary) !important; }
+.text-muted { color: var(--av-text-muted) !important; }
+.text-danger { color: oklch(var(--av-ink-danger)) !important; }
+
+.text-sm { font-size: var(--av-text-sm) !important; }
+.text-lg { font-size: var(--av-text-lg) !important; }
+
+.font-bold { font-weight: var(--av-font-bold) !important; }
+.font-mono { font-family: var(--av-font-mono) !important; }
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
