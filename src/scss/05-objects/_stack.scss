@@ -1,0 +1,26 @@
+/* THE STACK
+   Vertical rhythm manager. Adds space between children.
+   Usage: <div class="av-stack">...</div>
+*/
+.av-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  /* Default gap */
+  gap: var(--av-space-4);
+
+  /* Recursive Stack (The "Owl" selector alternative for modern flex) */
+  & > * {
+    margin-block: 0;
+  }
+
+  &.av-stack-sm { gap: var(--av-space-2); }
+  &.av-stack-lg { gap: var(--av-space-8); }
+
+  /* Recursive nesting: Allow split stacks */
+  &.av-stack-split {
+    justify-content: space-between;
+    height: 100%;
+  }
+}

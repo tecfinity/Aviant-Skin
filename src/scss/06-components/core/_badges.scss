@@ -1,0 +1,65 @@
+/* CORE BADGES
+   Status indicators.
+*/
+.av-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.25em 0.65em;
+  font-size: 0.75em;
+  font-weight: var(--av-font-bold);
+  line-height: 1;
+  border-radius: var(--av-radius-full);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  /* Default (Gray/Neutral) */
+  background-color: var(--av-surface-subtle);
+  color: var(--av-text-main);
+  border: 1px solid var(--av-border-subtle);
+
+  &.av-badge-brand {
+    background-color: oklch(from var(--av-action-primary) l c h / 0.1);
+    color: var(--av-action-primary);
+    border-color: transparent;
+  }
+
+  &.av-badge-success {
+    background-color: oklch(from var(--av-ink-success) l c h / 0.1);
+    color: oklch(var(--av-ink-success));
+    border-color: transparent;
+  }
+
+  &.av-badge-warning {
+    background-color: oklch(from var(--av-ink-warning) l c h / 0.1);
+    color: oklch(60% 0.15 85); /* Darker amber for contrast */
+    border-color: transparent;
+  }
+
+  &.av-badge-danger {
+    background-color: oklch(from var(--av-ink-danger) l c h / 0.1);
+    color: oklch(var(--av-ink-danger));
+    border-color: transparent;
+  }
+
+  /* Dot Variant (Little colored circle) */
+  &.av-badge-dot {
+    padding-left: 0;
+    background: transparent;
+    border: none;
+    color: var(--av-text-main);
+    text-transform: none;
+
+    &::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: currentColor;
+      margin-right: 0.5em;
+    }
+
+    &.av-badge-success::before { background-color: oklch(var(--av-ink-success)); }
+    &.av-badge-warning::before { background-color: oklch(var(--av-ink-warning)); }
+  }
+}

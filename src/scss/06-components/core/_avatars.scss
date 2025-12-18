@@ -1,0 +1,40 @@
+/* CORE AVATARS
+   User profile images.
+*/
+.av-avatar {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--av-surface-subtle);
+  border: 1px solid var(--av-border-subtle);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Text Fallback */
+  &.av-avatar-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--av-text-xs);
+    font-weight: var(--av-font-bold);
+    color: var(--av-text-muted);
+  }
+
+  /* Sizes */
+  &.av-avatar-sm { width: 2rem; height: 2rem; font-size: 0.65rem; }
+  &.av-avatar-lg { width: 4rem; height: 4rem; font-size: 1.25rem; }
+
+  /* Avatar Group (Overlapping) */
+  .av-avatar-group & {
+    border: 2px solid var(--av-surface-base); /* Cutout effect */
+    margin-left: -0.75rem;
+    &:first-child { margin-left: 0; }
+  }
+}

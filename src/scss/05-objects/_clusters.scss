@@ -1,0 +1,13 @@
+/* THE CLUSTER
+   Horizontal wrapping layout (Tags, Button groups).
+*/
+.av-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--av-space-2);
+  align-items: center;
+
+  &.av-cluster-center { justify-content: center; }
+  &.av-cluster-between { justify-content: space-between; }
+  &.av-cluster-end { justify-content: flex-end; }
+}
