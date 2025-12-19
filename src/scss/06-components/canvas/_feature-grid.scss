@@ -6,10 +6,15 @@
   display: grid;
   gap: var(--av-space-8);
   align-items: center;
-  margin-bottom: var(--av-space-16);
+  padding: var(--av-space-10);
+  border-radius: var(--av-radius-xl);
+  background: linear-gradient(135deg, var(--av-surface-panel), var(--av-surface-subtle));
+  border: 1px solid var(--av-border-subtle);
+  box-shadow: 0 24px 45px -35px rgba(15, 23, 42, 0.4);
+  margin-bottom: var(--av-space-12);
 
   @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--av-space-16);
 
     /* Alternating Order logic for visual interest */
@@ -30,10 +35,12 @@
     border-radius: var(--av-radius-xl);
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 4 / 3;
 
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
     }
 

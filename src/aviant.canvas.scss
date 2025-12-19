@@ -18,4 +18,5 @@
 @layer components {
   /* Import Canvas Components */
   @include meta.load-css("scss/06-components/canvas/hero");
+  @include meta.load-css("scss/06-components/canvas/feature-grid");
 }

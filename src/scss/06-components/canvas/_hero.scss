@@ -48,3 +48,15 @@
     font-weight: var(--av-font-light);
   }
 }
+
+.av-hero-visual {
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .av-hero-visual {
+    display: block;
+  }
+}

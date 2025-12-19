@@ -61,3 +61,32 @@
     --av-border-strong:   oklch(40% 0 0);
   }
 }
+
+/* =========================================
+   4. EXPLICIT THEME OVERRIDES
+   ========================================= */
+:root.dark {
+  --av-surface-base:    oklch(12% 0.02 260);
+  --av-surface-subtle:  oklch(15% 0.02 260);
+  --av-surface-studio:  oklch(10% 0.02 260);
+  --av-surface-panel:   oklch(18% 0.02 260);
+
+  --av-text-main:       oklch(98% 0 0);
+  --av-text-muted:      oklch(70% 0 0);
+
+  --av-border-subtle:   oklch(25% 0 0);
+  --av-border-strong:   oklch(40% 0 0);
+}
+
+:root.light {
+  --av-surface-base:    oklch(100% 0 0);
+  --av-surface-subtle:  oklch(98% 0.01 240);
+  --av-surface-studio:  oklch(96% 0.02 240);
+  --av-surface-panel:   oklch(100% 0 0);
+
+  --av-text-main:       oklch(15% 0.02 260);
+  --av-text-muted:      oklch(55% 0.02 260);
+
+  --av-border-subtle:   oklch(92% 0 0);
+  --av-border-strong:   oklch(80% 0 0);
+}
