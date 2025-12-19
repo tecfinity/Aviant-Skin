@@ -3,10 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviant Studio | Cockpit</title>
+    <title>Aviant Studio | Command Center</title>
     <!-- Import Studio Theme (Loads Core + Sidebar + Tables) -->
     <script type="module" src="/src/aviant.studio.scss"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* keep existing tokens — adjust as needed */
+        }
+
+        .studio-topbar {
+            height: 72px;
+            border-bottom: 1px solid var(--av-border-subtle);
+            background: var(--av-surface-base);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--av-space-6);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Normalized main container spacing */
+        .studio-main {
+            padding: var(--av-space-5); /* slightly reduced */
+            display: flex;
+            flex-direction: column;
+            gap: var(--av-space-6); /* consistent vertical rhythm */
+            box-sizing: border-box;
+        }
+
+        /* Ensure consistent card/chart padding inside studio-main.
+           Use higher-specificity and !important to override inline styles */
+        .studio-main > section,
+        .studio-main .av-card,
+        .studio-main .studio-chart {
+            padding: var(--av-space-5) !important;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fine-tune inner stacks and spacing to remove extra inline offsets */
+        .studio-main .av-stack {
+            margin-top: 0 !important;
+            gap: var(--av-space-4);
+        }
+
+        .studio-main .studio-section-title {
+            margin: 0 0 var(--av-space-4) 0;
+        }
+
+        .studio-kpi {
+            border: 1px solid var(--av-border-subtle);
+            background: var(--av-surface-panel);
+            border-radius: var(--av-radius-lg);
+            padding: var(--av-space-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--av-space-3);
+        }
+
+        .studio-kpi .value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .studio-chart {
+            background: var(--av-surface-panel);
+            border: 1px solid var(--av-border-subtle);
+            border-radius: var(--av-radius-lg);
+            padding: var(--av-space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--av-space-5);
+            min-height: 320px;
+        }
+
+        .studio-chart svg {
+            width: 100%;
+            height: 180px;
+        }
+
+        .studio-progress {
+            height: 8px;
+            border-radius: 999px;
+            background: var(--av-surface-subtle);
+            overflow: hidden;
+        }
+
+        .studio-progress span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--av-action-primary);
+        }
+
+        .studio-section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--av-space-4);
+        }
+
+        .studio-activity {
+            display: flex;
+            align-items: center;
+            gap: var(--av-space-4);
+            padding: var(--av-space-4) 0;
+            border-bottom: 1px solid var(--av-border-subtle);
+        }
+
+        .studio-activity:last-child {
+            border-bottom: none;
+        }
+
+        .studio-pill {
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: var(--av-surface-subtle);
+            font-size: var(--av-text-xs);
+            color: var(--av-text-muted);
+        }
+
+        .studio-grid-two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--av-space-6);
+        }
+
+        .studio-integration {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--av-space-4);
+            border-radius: var(--av-radius-md);
+            border: 1px solid var(--av-border-subtle);
+        }
+
+        .studio-tag {
+            font-size: var(--av-text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--av-text-muted);
+        }
+
+        .studio-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #10b981;
+            font-weight: 600;
+            font-size: var(--av-text-xs);
+        }
+
+        /* small responsive niceties */
+        @media (max-width: 720px) {
+            .studio-main {
+                padding: var(--av-space-4);
+                gap: var(--av-space-5);
+            }
+            .studio-kpi { padding: var(--av-space-3); }
+        }
+    </style>
 </head>
 <body>
 
@@ -22,26 +185,52 @@
 
         <nav class="av-sidebar-nav">
             <div style="padding: 0 var(--av-space-3); margin-bottom: var(--av-space-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">
-                Main Menu
+                Overview
             </div>
             <a href="#" class="av-nav-item active">
-                <i data-lucide="layout-dashboard"></i> Dashboard
+                <i data-lucide="layout-dashboard"></i> Command Center
             </a>
             <a href="#" class="av-nav-item">
-                <i data-lucide="file-text"></i> Content
+                <i data-lucide="sparkles"></i> Live Insights
             </a>
             <a href="#" class="av-nav-item">
-                <i data-lucide="image"></i> Media Library
+                <i data-lucide="activity"></i> Performance
+            </a>
+
+            <div style="padding: 0 var(--av-space-3); margin-top: var(--av-space-6); margin-bottom: var(--av-space-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">
+                Workspace
+            </div>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="file-text"></i> Content Operations
+            </a>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="image"></i> Media Studio
+            </a>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="workflow"></i> Automations
+            </a>
+
+            <div style="padding: 0 var(--av-space-3); margin-top: var(--av-space-6); margin-bottom: var(--av-space-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">
+                Data & Security
+            </div>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="database"></i> Data Hub
+            </a>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="shield-check"></i> Compliance
+            </a>
+            <a href="#" class="av-nav-item">
+                <i data-lucide="users"></i> Identity & Access
             </a>
 
             <div style="padding: 0 var(--av-space-3); margin-top: var(--av-space-6); margin-bottom: var(--av-space-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">
                 System
             </div>
             <a href="#" class="av-nav-item">
-                <i data-lucide="users"></i> Users & Roles
+                <i data-lucide="settings"></i> Settings
             </a>
             <a href="#" class="av-nav-item">
-                <i data-lucide="settings"></i> Settings
+                <i data-lucide="life-buoy"></i> Support Desk
             </a>
         </nav>
 
@@ -57,127 +246,458 @@
     <main class="av-studio-content">
 
         <!-- Topbar -->
-        <header style="height: 64px; border-bottom: 1px solid var(--av-border-subtle); background: var(--av-surface-base); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--av-space-6);">
-            <div style="display: flex; align-items: center; gap: var(--av-space-3);">
-                <h1 style="font-size: var(--av-text-lg); margin: 0;">Content Manager</h1>
-                <span class="av-badge av-badge-warning" style="font-size: 10px;">Beta</span>
+        <header class="studio-topbar">
+            <div style="display: flex; align-items: center; gap: var(--av-space-4);">
+                <div>
+                    <div class="studio-tag">Workspace</div>
+                    <h1 style="font-size: var(--av-text-lg); margin: 0;">Aviant Command Center</h1>
+                </div>
+                <span class="studio-flag"><i data-lucide="shield"></i> SOC2 Compliant</span>
             </div>
 
-            <div style="display: flex; gap: var(--av-space-3);">
+            <div style="display: flex; align-items: center; gap: var(--av-space-3);">
+                <div class="av-input-group" style="width: 260px;">
+                    <input type="text" class="av-input" placeholder="Search deployments, users, content...">
+                </div>
                 <button class="av-btn av-btn-ghost av-btn-sm"><i data-lucide="bell" style="width: 16px;"></i></button>
+                <button class="av-btn av-btn-ghost av-btn-sm"><i data-lucide="message-circle" style="width: 16px;"></i></button>
                 <button class="av-btn av-btn-primary av-btn-sm">
-                    <i data-lucide="plus" style="width: 14px;"></i> Create Entry
+                    <i data-lucide="plus" style="width: 14px;"></i> New Project
                 </button>
             </div>
         </header>
 
-        <!-- Page Content -->
-        <div style="padding: var(--av-space-6); flex: 1; overflow-y: auto;">
+        <div class="studio-main">
 
-            <!-- Filter Bar -->
-            <div style="display: flex; gap: var(--av-space-3); margin-bottom: var(--av-space-6);">
-                <div class="av-input-group" style="width: 300px;">
-                    <input type="text" class="av-input" placeholder="Search content...">
+            <section class="av-card" style="padding: var(--av-space-6);">
+                <div class="studio-section-title">
+                    <div>
+                        <div class="studio-tag">Overview</div>
+                        <h2 style="margin: 0;">Global Operations Summary</h2>
+                        <p class="text-muted" style="margin: var(--av-space-2) 0 0;">Monitor the real-time health of your digital estate across regions, teams, and products.</p>
+                    </div>
+                    <div class="av-cluster" style="gap: var(--av-space-3);">
+                        <button class="av-btn av-btn-ghost av-btn-sm">Download Report</button>
+                        <button class="av-btn av-btn-primary av-btn-sm">Launch War Room</button>
+                    </div>
                 </div>
-                <select class="av-select" style="width: 150px;">
-                    <option>All Statuses</option>
-                    <option>Published</option>
-                    <option>Draft</option>
-                </select>
-            </div>
+            </section>
 
-            <!-- Data Table -->
-            <div class="av-table-container">
-                <table class="av-table">
-                    <thead>
-                    <tr>
-                        <th style="width: 48px; text-align: center;"><input type="checkbox" class="av-checkbox"></th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Status</th>
-                        <th>Last Modified</th>
-                        <th style="text-align: right;">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Row 1 -->
-                    <tr>
-                        <td style="text-align: center;"><input type="checkbox" class="av-checkbox"></td>
-                        <td>
-                            <div style="font-weight: 500;">Launching Aviant v2.0</div>
-                            <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/blog/launching-aviant</div>
-                        </td>
-                        <td>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div style="width: 20px; height: 20px; background: #e0e7ff; color: #4338ca; border-radius: 50%; font-size: 10px; display: grid; place-content: center; font-weight: bold;">JD</div>
-                                <span>John Doe</span>
-                            </div>
-                        </td>
-                        <td><span class="av-badge av-badge-success">Published</span></td>
-                        <td style="color: var(--av-text-muted);">2 hours ago</td>
-                        <td style="text-align: right;">
-                            <div class="av-row-actions" style="opacity: 0.5; transition: opacity 0.2s;">
-                                <button class="av-btn av-btn-ghost av-btn-sm" style="padding: 4px 8px;">Edit</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 2 -->
-                    <tr style="background-color: oklch(from var(--av-action-primary) l c h / 0.03);">
-                        <td style="text-align: center;"><input type="checkbox" class="av-checkbox" checked></td>
-                        <td>
-                            <div style="font-weight: 500;">Q4 Financial Report</div>
-                            <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/reports/q4-2024</div>
-                        </td>
-                        <td>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div style="width: 20px; height: 20px; background: #fef3c7; color: #b45309; border-radius: 50%; font-size: 10px; display: grid; place-content: center; font-weight: bold;">AS</div>
-                                <span>Anna Smith</span>
-                            </div>
-                        </td>
-                        <td><span class="av-badge av-badge-warning">Draft</span></td>
-                        <td style="color: var(--av-text-muted);">Yesterday</td>
-                        <td style="text-align: right;">
-                            <div class="av-row-actions" style="opacity: 0.5;">
-                                <button class="av-btn av-btn-ghost av-btn-sm" style="padding: 4px 8px;">Edit</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 3 -->
-                    <tr>
-                        <td style="text-align: center;"><input type="checkbox" class="av-checkbox"></td>
-                        <td>
-                            <div style="font-weight: 500;">Privacy Policy Update</div>
-                            <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/legal/privacy</div>
-                        </td>
-                        <td>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div style="width: 20px; height: 20px; background: #e0e7ff; color: #4338ca; border-radius: 50%; font-size: 10px; display: grid; place-content: center; font-weight: bold;">JD</div>
-                                <span>John Doe</span>
-                            </div>
-                        </td>
-                        <td><span class="av-badge av-badge-success">Published</span></td>
-                        <td style="color: var(--av-text-muted);">Oct 24, 2024</td>
-                        <td style="text-align: right;">
-                            <div class="av-row-actions" style="opacity: 0.5;">
-                                <button class="av-btn av-btn-ghost av-btn-sm" style="padding: 4px 8px;">Edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--av-space-4); color: var(--av-text-muted); font-size: var(--av-text-sm);">
-                <div>Showing 1-3 of 48 items</div>
-                <div style="display: flex; gap: var(--av-space-2);">
-                    <button class="av-btn av-btn-ghost av-btn-sm" disabled>Previous</button>
-                    <button class="av-btn av-btn-ghost av-btn-sm">Next</button>
+            <section class="av-grid av-grid-auto-fit" style="--min-col-width: 240px; gap: var(--av-space-6);">
+                <div class="studio-kpi">
+                    <div class="av-cluster" style="justify-content: space-between;">
+                        <span class="studio-tag">Active Tenants</span>
+                        <i data-lucide="building-2" style="width: 18px; color: var(--av-action-primary);"></i>
+                    </div>
+                    <div class="value">128</div>
+                    <div class="studio-pill">+12% MoM</div>
                 </div>
-            </div>
+                <div class="studio-kpi">
+                    <div class="av-cluster" style="justify-content: space-between;">
+                        <span class="studio-tag">Monthly Revenue</span>
+                        <i data-lucide="credit-card" style="width: 18px; color: var(--av-action-primary);"></i>
+                    </div>
+                    <div class="value">$4.8M</div>
+                    <div class="studio-pill">+18% pipeline</div>
+                </div>
+                <div class="studio-kpi">
+                    <div class="av-cluster" style="justify-content: space-between;">
+                        <span class="studio-tag">Uptime SLA</span>
+                        <i data-lucide="server" style="width: 18px; color: var(--av-action-primary);"></i>
+                    </div>
+                    <div class="value">99.995%</div>
+                    <div class="studio-pill">Last 24h</div>
+                </div>
+                <div class="studio-kpi">
+                    <div class="av-cluster" style="justify-content: space-between;">
+                        <span class="studio-tag">Open Incidents</span>
+                        <i data-lucide="alert-triangle" style="width: 18px; color: #f59e0b;"></i>
+                    </div>
+                    <div class="value">3</div>
+                    <div class="studio-pill">2 in progress</div>
+                </div>
+            </section>
 
+            <section class="studio-grid-two">
+                <div class="studio-chart">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Analytics</div>
+                            <h3 style="margin: 0;">Global Traffic & API Latency</h3>
+                            <p class="text-muted" style="margin: var(--av-space-2) 0 0;">Streaming telemetry from 27 regions with automatic anomaly detection.</p>
+                        </div>
+                        <button class="av-btn av-btn-ghost av-btn-sm">View Diagnostics</button>
+                    </div>
+                    <svg viewBox="0 0 400 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="rgba(59,130,246,0.5)" />
+                                <stop offset="100%" stop-color="rgba(59,130,246,0)" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M0 110 C 40 70, 80 90, 120 60 C 160 30, 200 80, 240 50 C 280 20, 320 40, 360 30 L 400 20" stroke="rgba(59,130,246,0.9)" stroke-width="3" fill="none" />
+                        <path d="M0 110 C 40 70, 80 90, 120 60 C 160 30, 200 80, 240 50 C 280 20, 320 40, 360 30 L 400 20 L 400 140 L 0 140 Z" fill="url(#chartFill)" />
+                        <circle cx="160" cy="30" r="4" fill="rgba(59,130,246,1)" />
+                        <circle cx="280" cy="20" r="4" fill="rgba(59,130,246,1)" />
+                    </svg>
+                    <div class="av-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--av-space-4);">
+                        <div>
+                            <div class="studio-tag">Requests</div>
+                            <strong>18.6M</strong>
+                            <div class="text-muted" style="font-size: var(--av-text-xs);">Last 24h</div>
+                        </div>
+                        <div>
+                            <div class="studio-tag">Avg Latency</div>
+                            <strong>148ms</strong>
+                            <div class="text-muted" style="font-size: var(--av-text-xs);">-12ms vs yesterday</div>
+                        </div>
+                        <div>
+                            <div class="studio-tag">Edge Cache</div>
+                            <strong>94%</strong>
+                            <div class="text-muted" style="font-size: var(--av-text-xs);">Hit ratio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="studio-chart">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Experience</div>
+                            <h3 style="margin: 0;">Customer Journey Health</h3>
+                            <p class="text-muted" style="margin: var(--av-space-2) 0 0;">Track conversion funnels and live CX signals across your digital touchpoints.</p>
+                        </div>
+                        <button class="av-btn av-btn-ghost av-btn-sm">Manage Journeys</button>
+                    </div>
+                    <div class="av-stack av-stack-sm">
+                        <div>
+                            <div class="av-cluster" style="justify-content: space-between;">
+                                <span>Awareness → Signup</span>
+                                <strong>72%</strong>
+                            </div>
+                            <div class="studio-progress"><span style="width: 72%;"></span></div>
+                        </div>
+                        <div>
+                            <div class="av-cluster" style="justify-content: space-between;">
+                                <span>Signup → Activation</span>
+                                <strong>58%</strong>
+                            </div>
+                            <div class="studio-progress"><span style="width: 58%; background: #6366f1;"></span></div>
+                        </div>
+                        <div>
+                            <div class="av-cluster" style="justify-content: space-between;">
+                                <span>Activation → Retention</span>
+                                <strong>46%</strong>
+                            </div>
+                            <div class="studio-progress"><span style="width: 46%; background: #14b8a6;"></span></div>
+                        </div>
+                        <div class="av-card" style="padding: var(--av-space-4); background: var(--av-surface-subtle);">
+                            <div class="av-cluster av-cluster-between">
+                                <div>
+                                    <div class="studio-tag">CX Alert</div>
+                                    <strong>EMEA latency spike</strong>
+                                </div>
+                                <span class="av-badge av-badge-warning">Investigating</span>
+                            </div>
+                            <p class="text-muted" style="margin-top: var(--av-space-2);">Automated workflow opened an incident and notified regional SREs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="studio-grid-two">
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Live Activity</div>
+                            <h3 style="margin: 0;">Operations Feed</h3>
+                        </div>
+                        <button class="av-btn av-btn-ghost av-btn-sm">View All</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="studio-activity">
+                            <div class="av-avatar" style="width: 36px; height: 36px;">AZ</div>
+                            <div>
+                                <strong>Asia-Pacific build promoted</strong>
+                                <div class="text-muted" style="font-size: var(--av-text-xs);">Release 8.4.2 deployed to 12 clusters.</div>
+                            </div>
+                            <span class="studio-pill" style="margin-left: auto;">2m ago</span>
+                        </div>
+                        <div class="studio-activity">
+                            <div class="av-avatar" style="width: 36px; height: 36px; background: #e0f2fe; color: #0369a1;">JM</div>
+                            <div>
+                                <strong>Journey "Renewal" optimized</strong>
+                                <div class="text-muted" style="font-size: var(--av-text-xs);">Conversion lift +4.2% after experiment rollout.</div>
+                            </div>
+                            <span class="studio-pill" style="margin-left: auto;">12m ago</span>
+                        </div>
+                        <div class="studio-activity">
+                            <div class="av-avatar" style="width: 36px; height: 36px; background: #ede9fe; color: #6d28d9;">KP</div>
+                            <div>
+                                <strong>Security posture updated</strong>
+                                <div class="text-muted" style="font-size: var(--av-text-xs);">New IP allowlist and SOC workflow approved.</div>
+                            </div>
+                            <span class="studio-pill" style="margin-left: auto;">45m ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Workflow</div>
+                            <h3 style="margin: 0;">Critical Queue</h3>
+                        </div>
+                        <button class="av-btn av-btn-primary av-btn-sm">Resolve Queue</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="av-card" style="padding: var(--av-space-4); background: var(--av-surface-subtle);">
+                            <div class="av-cluster av-cluster-between">
+                                <div>
+                                    <strong>APAC CDN Burst</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Auto-scaling threshold at 80%.</div>
+                                </div>
+                                <span class="av-badge av-badge-warning">High</span>
+                            </div>
+                            <div class="av-cluster" style="margin-top: var(--av-space-3); gap: var(--av-space-2);">
+                                <button class="av-btn av-btn-ghost av-btn-sm">Assign</button>
+                                <button class="av-btn av-btn-primary av-btn-sm">Open Runbook</button>
+                            </div>
+                        </div>
+                        <div class="av-card" style="padding: var(--av-space-4); background: var(--av-surface-subtle);">
+                            <div class="av-cluster av-cluster-between">
+                                <div>
+                                    <strong>Payments latency</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Dependency regression from partner API.</div>
+                                </div>
+                                <span class="av-badge av-badge-danger">Critical</span>
+                            </div>
+                            <div class="av-cluster" style="margin-top: var(--av-space-3); gap: var(--av-space-2);">
+                                <button class="av-btn av-btn-ghost av-btn-sm">Escalate</button>
+                                <button class="av-btn av-btn-primary av-btn-sm">Start Incident</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="av-card" style="padding: var(--av-space-6);">
+                <div class="studio-section-title">
+                    <div>
+                        <div class="studio-tag">Operations</div>
+                        <h3 style="margin: 0;">Content Pipeline</h3>
+                        <p class="text-muted" style="margin: var(--av-space-2) 0 0;">Track publishing throughput across global teams.</p>
+                    </div>
+                    <div class="av-cluster" style="gap: var(--av-space-2);">
+                        <button class="av-btn av-btn-ghost av-btn-sm">Export CSV</button>
+                        <button class="av-btn av-btn-primary av-btn-sm">Create Entry</button>
+                    </div>
+                </div>
+
+                <div class="av-table-container" style="margin-top: var(--av-space-4);">
+                    <table class="av-table">
+                        <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Owner</th>
+                            <th>Status</th>
+                            <th>Region</th>
+                            <th>Last Updated</th>
+                            <th style="text-align: right;">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div style="font-weight: 500;">Global Homepage Redesign</div>
+                                <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/experience/homepage</div>
+                            </td>
+                            <td>Alex Rivera</td>
+                            <td><span class="av-badge av-badge-success">Published</span></td>
+                            <td>Global</td>
+                            <td class="text-muted">2 hours ago</td>
+                            <td style="text-align: right;">
+                                <button class="av-btn av-btn-ghost av-btn-sm">Open</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="font-weight: 500;">Q2 Investor Release</div>
+                                <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/press/q2-investor</div>
+                            </td>
+                            <td>Monica Chen</td>
+                            <td><span class="av-badge av-badge-warning">Review</span></td>
+                            <td>NA</td>
+                            <td class="text-muted">Yesterday</td>
+                            <td style="text-align: right;">
+                                <button class="av-btn av-btn-ghost av-btn-sm">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="font-weight: 500;">Retail Pilot Landing</div>
+                                <div style="font-size: var(--av-text-xs); color: var(--av-text-muted);">/retail/pilot</div>
+                            </td>
+                            <td>Samuel Lee</td>
+                            <td><span class="av-badge av-badge-danger">Blocked</span></td>
+                            <td>APAC</td>
+                            <td class="text-muted">2 days ago</td>
+                            <td style="text-align: right;">
+                                <button class="av-btn av-btn-ghost av-btn-sm">Unblock</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="studio-grid-two">
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Teams</div>
+                            <h3 style="margin: 0;">Collaboration Hub</h3>
+                        </div>
+                        <button class="av-btn av-btn-ghost av-btn-sm">Invite</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="av-cluster av-cluster-between">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <div class="av-avatar" style="width: 36px; height: 36px;">KS</div>
+                                <div>
+                                    <strong>Kelly Summers</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">VP, Digital Ops</div>
+                                </div>
+                            </div>
+                            <span class="av-badge av-badge-brand">Owner</span>
+                        </div>
+                        <div class="av-cluster av-cluster-between">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <div class="av-avatar" style="width: 36px; height: 36px; background: #fee2e2; color: #b91c1c;">RL</div>
+                                <div>
+                                    <strong>Rohan Lee</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Platform Engineering</div>
+                                </div>
+                            </div>
+                            <span class="av-badge">Editor</span>
+                        </div>
+                        <div class="av-cluster av-cluster-between">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <div class="av-avatar" style="width: 36px; height: 36px; background: #d1fae5; color: #047857;">MA</div>
+                                <div>
+                                    <strong>Marina Alvarez</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Compliance Lead</div>
+                                </div>
+                            </div>
+                            <span class="av-badge av-badge-success">Reviewer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Integrations</div>
+                            <h3 style="margin: 0;">Connected Services</h3>
+                        </div>
+                        <button class="av-btn av-btn-primary av-btn-sm">Add Integration</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="studio-integration">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <i data-lucide="cloud" style="width: 18px;"></i>
+                                <div>
+                                    <strong>Cloudflare Edge</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Latency optimized</div>
+                                </div>
+                            </div>
+                            <span class="av-badge av-badge-success">Healthy</span>
+                        </div>
+                        <div class="studio-integration">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <i data-lucide="database" style="width: 18px;"></i>
+                                <div>
+                                    <strong>Snowflake</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Data sync every 30m</div>
+                                </div>
+                            </div>
+                            <span class="av-badge av-badge-warning">Lagging</span>
+                        </div>
+                        <div class="studio-integration">
+                            <div class="av-cluster" style="gap: var(--av-space-3);">
+                                <i data-lucide="slack" style="width: 18px;"></i>
+                                <div>
+                                    <strong>Slack Ops</strong>
+                                    <div class="text-muted" style="font-size: var(--av-text-xs);">Alerts routed to #war-room</div>
+                                </div>
+                            </div>
+                            <span class="av-badge">Connected</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="studio-grid-two">
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">System Health</div>
+                            <h3 style="margin: 0;">Security & Governance</h3>
+                        </div>
+                        <button class="av-btn av-btn-ghost av-btn-sm">Audit Logs</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="av-alert av-alert-success">
+                            <i data-lucide="shield-check" class="av-alert-icon"></i>
+                            <div><strong>Zero critical findings.</strong> Weekly penetration scan completed.</div>
+                        </div>
+                        <div class="av-alert av-alert-warning">
+                            <i data-lucide="alert-circle" class="av-alert-icon"></i>
+                            <div><strong>3 privileged access reviews pending.</strong> Due in 2 days.</div>
+                        </div>
+                        <div class="av-alert av-alert-info">
+                            <i data-lucide="radio" class="av-alert-icon"></i>
+                            <div><strong>Streaming logs active.</strong> 98% retention compliance.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="av-card" style="padding: var(--av-space-6);">
+                    <div class="studio-section-title">
+                        <div>
+                            <div class="studio-tag">Workspace</div>
+                            <h3 style="margin: 0;">Quick Configuration</h3>
+                        </div>
+                        <button class="av-btn av-btn-primary av-btn-sm">Save Changes</button>
+                    </div>
+                    <div class="av-stack" style="margin-top: var(--av-space-4);">
+                        <div class="av-input-group">
+                            <label class="av-label">Primary Region</label>
+                            <select class="av-select">
+                                <option>Global (Auto)</option>
+                                <option>North America</option>
+                                <option>Europe</option>
+                                <option>Asia Pacific</option>
+                            </select>
+                        </div>
+                        <div class="av-input-group">
+                            <label class="av-label">Release Channel</label>
+                            <select class="av-select">
+                                <option>Stable</option>
+                                <option>Preview</option>
+                                <option>Canary</option>
+                            </select>
+                        </div>
+                        <div class="av-input-group">
+                            <label class="av-label">Operational Notes</label>
+                            <textarea class="av-textarea" rows="3" placeholder="Share instructions for your global teams."></textarea>
+                        </div>
+                        <div class="av-cluster" style="gap: var(--av-space-3);">
+                            <button class="av-btn av-btn-ghost av-btn-sm">Reset</button>
+                            <button class="av-btn av-btn-primary av-btn-sm">Apply Configuration</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 </div>

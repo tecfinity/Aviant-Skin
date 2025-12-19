@@ -8,6 +8,7 @@
 
   /* Brand: Aviant Dark (Deep Navy/Black) */
   --av-ink-dark: 18% 0.04 260;
+  --av-brand-dark: oklch(var(--av-ink-dark));
 
   /* Semantic Tints (Success/Warning/Error) */
   --av-ink-success: 65% 0.18 145; /* Green */

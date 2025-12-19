@@ -12,6 +12,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        .canvas-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            border-bottom: 1px solid var(--av-border-subtle);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+        }
+
+        .dark .canvas-nav {
+            background: rgba(8, 12, 22, 0.65);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .canvas-nav-brand {
+            color: var(--av-text-main);
+        }
+
+        .dark .canvas-nav-brand {
+            color: var(--av-text-inverse);
+        }
+
+        .canvas-nav-link {
+            color: var(--av-text-main);
+            text-decoration: none;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .dark .canvas-nav-link {
+            color: var(--av-text-inverse);
+            opacity: 0.85;
+        }
+
+        .canvas-hero {
+            position: relative;
+        }
+
+        .canvas-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(2, 8, 24, 0.9), rgba(2, 8, 24, 0.5));
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .light .canvas-hero::after {
+            opacity: 1;
+        }
+
+        .canvas-hero .av-hero-content {
+            color: var(--av-text-inverse);
+        }
+
+        .canvas-hero .lead {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .light .canvas-hero h1 {
+            background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .canvas-hero-badge {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        .canvas-hero-secondary {
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .light .canvas-hero-secondary {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
         /* Theme Toggle Button Style */
         .theme-toggle {
             position: fixed;
@@ -100,17 +185,17 @@
 <body>
 
 <!-- NAVIGATION -->
-<nav class="av-navbar" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1);">
+<nav class="av-navbar canvas-nav">
     <div class="av-container">
         <div class="av-cluster av-cluster-between" style="height: 80px;">
-            <div class="av-cluster" style="color: white; gap: 0.75rem;">
+            <div class="av-cluster canvas-nav-brand" style="gap: 0.75rem;">
                 <i data-lucide="layers" style="width: 24px; height: 24px; color: var(--av-action-primary);"></i>
                 <span style="font-weight: 700; letter-spacing: -0.02em; font-size: 1.25rem;">Aviant</span>
             </div>
             <div class="av-cluster av-nav-links" style="gap: var(--av-space-8);">
-                <a href="#features" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Platform</a>
-                <a href="#solutions" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Solutions</a>
-                <a href="#pricing" style="color: white; text-decoration: none; opacity: 0.8; font-weight: 500;">Pricing</a>
+                <a href="#features" class="canvas-nav-link">Platform</a>
+                <a href="#solutions" class="canvas-nav-link">Solutions</a>
+                <a href="#pricing" class="canvas-nav-link">Pricing</a>
             </div>
             <div>
                 <button class="av-btn av-btn-primary av-btn-sm">Get Started</button>
@@ -120,16 +205,16 @@
 </nav>
 
 <!-- HERO SECTION (Parallax) -->
-<header class="av-hero" style="min-height: 100vh; display: flex; align-items: center; padding-top: 120px;">
+<header class="av-hero canvas-hero" style="min-height: 100vh; display: flex; align-items: center; padding-top: 120px;">
     <div class="av-container">
         <div class="av-grid av-grid-auto-fit" style="--min-col-width: 450px; align-items: center; gap: var(--av-space-16);">
 
             <!-- Text Content -->
             <div class="av-hero-content">
                 <div class="av-cluster" style="margin-bottom: var(--av-space-8);">
-                        <span class="av-badge av-badge-brand" style="border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); color: white;">
-                            Enterprise Ready
-                        </span>
+                    <span class="av-badge av-badge-brand canvas-hero-badge">
+                        Enterprise Ready
+                    </span>
                 </div>
 
                 <h1>The Future of<br><span style="color: var(--av-action-primary); font-style: italic;">Digital Experiences.</span></h1>
@@ -142,7 +227,7 @@
                     <button class="av-btn av-btn-primary av-btn-lg">
                         Start Building <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
                     </button>
-                    <button class="av-btn av-btn-ghost av-btn-lg" style="color: white; border: 1px solid rgba(255,255,255,0.2);">
+                    <button class="av-btn av-btn-ghost av-btn-lg canvas-hero-secondary">
                         Talk to Sales
                     </button>
                 </div>
